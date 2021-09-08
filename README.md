@@ -34,7 +34,7 @@ cd EASY-PWM && chmod +x EASY-PWM.sh
 ## Implementaciones
 - **bspwm** -> [baskerville](https://github.com/baskerville)
 - **sxhkd** -> [baskerville](https://github.com/baskerville/sxhkd.git)
-- **temas** -> [VaughnValle](https://github.com/VaughnValle/blue-sky.git)
+- **blue-sky** -> [VaughnValle](https://github.com/VaughnValle/blue-sky.git)
 - **polybar** -> [polybar](https://github.com/polybar/polybar)
 - **rofi**
 - **picom** -> [ibhagwan](https://github.com/ibhagwan/picom.git)
