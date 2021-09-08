@@ -43,6 +43,7 @@ cd EASY-PWM && chmod +x EASY-PWM.sh
 - **fzf** -> [junegunn](https://github.com/junegunn/fzf)
 - **sudo plugin** -> [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/sudo/sudo.plugin.zsh)
 - **hack nerd font** -> [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
+- - **i3lock / i3lock-color** -> [Raymo111](https://github.com/Raymo111/i3lock-color)
 - **extractPorts**
 - **mkt**
 - **settarget / cleartarget**
