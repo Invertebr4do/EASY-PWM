@@ -25,9 +25,9 @@ cd EASY-PWM && chmod +x EASY-PWM.sh
 
 ## Con esto hecho debería quedar así:
 
-[![Vista general](https://github.com/Invertebr4do/EASY-PWM/blob/main/WorkEnviroment2.png?raw=true "Vista general")]
+[![Vista general](https://github.com/Invertebr4do/EASY-PWM/blob/main/WorkEnviroment2.png?raw=true "Vista general")](https://github.com/Invertebr4do/EASY-PWM/blob/main/WorkEnviroment.png?raw=true "Vista consola")
 
-[![Vista consola](https://github.com/Invertebr4do/EASY-PWM/blob/main/WorkEnviroment.png?raw=true "Vista consola")]
+[![Vista consola](https://github.com/Invertebr4do/EASY-PWM/blob/main/WorkEnviroment.png?raw=true "Vista consola")](https://github.com/Invertebr4do/EASY-PWM/blob/main/WorkEnviroment.png?raw=true "Vista consola")
 
 ## Implementaciones
 - **bspwm** -> [baskerville](https://github.com/baskerville)
