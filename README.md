@@ -1,5 +1,7 @@
 <h1>EASY-PWM</h1>
-Este script hecho en bash está creado para la automatización de mi configuración de bspwm, es casi la misma de [s4vitar](https://github.com/s4vitar), pero con algunos cambios
+Este script hecho en bash está creado para la automatización de mi configuración de bspwm, es casi la misma de
+
+[s4vitar](https://github.com/s4vitar), pero con algunos cambios
 
 Esta utilidad está pensada para que sea completamente automática, esto te permitirá salir a tomarte un café mientras se configura bspwm
 
