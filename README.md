@@ -49,7 +49,7 @@ cd EASY-PWM && chmod +x EASY-PWM.sh
 - **settarget / cleartarget**
 - **zsh**
 - **firejail**
-- **fireshot**
+- **flameshot**
 
 ## Tutorial para la onfiguración manual:
 - s4vitar: https://www.youtube.com/watch?v=mHLwfI1nHHY&t=3013s
