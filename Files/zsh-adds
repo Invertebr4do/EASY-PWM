@@ -42,7 +42,7 @@ function extractPorts(){
     echo -e "\n${yellowColor}[${endColor}${greenColor}*${endColor}${yellowColor}] Extracting information...${endColor}\n" > extractPorts.tmp
     echo -e "\t${yellowColor}[${endColor}${greenColor}+${endColor}${yellowColor}] IP Address:${endColor} ${grayColor}$ip_address${endColor}">
     echo -e "\t${yellowColor}[${endColor}${greenColor}+${endColor}${yellowColor}] Open ports:${endColor} ${grayColor}$ports${endColor}\n"  >>
-    echo -n "$ports ip_address" | tr -d '\n' | xclip -sel clip
+    echo -n "$ports $ip_address" | tr -d '\n' | xclip -sel clip
     echo -e "${yellowColor}[${endColor}${greenColor}*${endColor}${yellowColor}] Ports copied to clipboard${endColor}\n"  >> extractPorts.tmp
     cat extractPorts.tmp; rm extractPorts.tmp
 }
