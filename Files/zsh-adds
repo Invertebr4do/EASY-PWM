@@ -12,6 +12,10 @@ function cleartarget(){
         echo "" > /home/invertebrado/.config/bin/target
 }
 
+function settarget(){
+        echo $1 > /home/invertebrado/.config/bin/target      
+}
+
 function mkt(){
     mkdir {nmap,content,exploits,scripts,tmp}
 }
