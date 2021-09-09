@@ -3,7 +3,7 @@ Este script hecho en bash está creado para la automatización de mi configuraci
 
 [s4vitar](https://github.com/s4vitar), pero con algunos cambios
 
-Esta utilidad está pensada para que sea completamente automática, esto te permitirá salir a tomarte un café mientras se configura bspwm
+Esta utilidad está pensada para que sea completamente automática, esto te permitirá salir a tomarte un café mientras se configura tu entorno bspwm
 
 ## Testeado en los siguientes OS:
 - Kali linux 2021.2
