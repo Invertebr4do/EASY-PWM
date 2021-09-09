@@ -136,7 +136,7 @@ function dependencies(){
 		xterm -T "INSTALLING NECESARY PACKAGES" -geometry 100x30 -e "sudo apt install build-essential git vim xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev -y"
 		status_code
         	echo -e "\n${turquoise}█ ${gray}PAQUETES INSTALADOS CORRECTAMENTE ${turquoise}█${end}"
-        	sleep 1; tput cnorm
+        	sleep 1
 		
 		if [ "$os" != "Kali" ]; then
 			which gnome-terminal > /dev/null 2>&1
@@ -177,18 +177,19 @@ function bspwm_sxhkd(){
 	status_code
 	xterm -T "INSTALLING BSPWM" -geometry 100x30 -e "sudo make install"
 	status_code
+	echo -e "\n${yellow}[*] INSTALANDO SXHKD${end}"; sleep 1
 	cd ../sxhkd/
 	xterm -T "INSTALLING SXHKD" -geometry 100x30 -e "make"
 	status_code
 	xterm -T "INSTALLING SXHKD" -geometry 100x30 -e "sudo make install"
 	cd ..
 	status_code
+	echo -e "\n${turquoise}█ ${gray}SXHKD INSTALADO CORRECTAMENTE ${turquoise}█${end}"; sleep 1
 	echo -e "\n${yellow}[*] INSTALANDO BSPWM${end}"; sleep 1
 	sleep 1
 	xterm -T "INSTALLING BSPWM" -geometry 100x30 -e "sudo apt install bspwm -y"
 	status_code
-        echo -e "\n${turquoise}█ ${gray}BSPWM INSTALADO CORRECTAMENTE ${turquoise}█${end}"
-        sleep 1
+        echo -e "\n${turquoise}█ ${gray}BSPWM INSTALADO CORRECTAMENTE ${turquoise}█${end}; sleep 1
 
 	echo -e "\n${yellow}[*] CARGANDO ALGUNOS FICHEROS DE BSPWM Y SXHKD${end}"; sleep 1
 	mkdir ~/.config/bspwm
@@ -208,7 +209,7 @@ function bspwm_sxhkd(){
 	if [ "$os" == "Kali" ]; then
 		cat Files/sxhkdrc | sed 's/USER/'$usr'/g' | sed 's/gnome-terminal/qterminal/' > ~/.config/sxhkd/sxhkdrc
 	else
-		cat Files/sxhkdrc | sed 's/USER/'$usr'/g' > ~/.config/sxhkd/.
+		cat Files/sxhkdrc | sed 's/USER/'$usr'/g' > ~/.config/sxhkd/sxhkdrc
 	fi
 	status_code
         echo -e "\n${turquoise}█ ${gray}SXHKDRC CONFIGURADO CORRECTAMENTE ${turquoise}█${end}"
@@ -305,8 +306,7 @@ function extra_utilities(){
 	xterm -T "INSTALLING XCLIP" -geometry 100x30 -e "sudo apt install xclip -y"
 	status_code
 
-	echo -e "\n${turquoise}█ ${gray}XCLIP INSTALADO CORRECTAMENTE ${turquoise}█${end}"
-	sleep 1
+	echo -e "\n${turquoise}█ ${gray}XCLIP INSTALADO CORRECTAMENTE ${turquoise}█${end}"; sleep 1
 	echo -e "\n${yellow}[*] INSTALANDO FIREJAIL"; sleep 1
         xterm -T "INSTALLING FIREJAIL" -geometry 100x30 -e "sudo apt install firejail -y"
         status_code
@@ -333,8 +333,7 @@ function fonts(){
 	cd Files
         unzip Hack.zip > /dev/null 2>&1 && sudo mv *.ttf /usr/local/share/fonts/. > /dev/null 2>&1
         status_code
-        echo -e "\n${turquoise}█ ${gray}HACK NERD FONTS INSTALADAS CORRECTAMENTE ${turquoise}█${end}"
-        sleep 1
+        echo -e "\n${turquoise}█ ${gray}HACK NERD FONTS INSTALADAS CORRECTAMENTE ${turquoise}█${end}"; sleep 1
         status_code; tput cnorm
 }
 
@@ -349,19 +348,16 @@ function configs(){
 	mkdir ~/.config/bin && sudo rm -r ../bspwm ../polybar ../sxhkd ../0
 	cp bin -r ~/.config/. && chmod +x ~/.config/bin/ethernet_status.sh ~/.config/bin/hackthebox_status.sh ~/.config/bin/target_ip.sh && chmod +x ~/.config/polybar/scripts/launcher ~/.config/polybar/scripts/powermenu ~/.config/polybar/scripts/powermenu_alt
 	status_code
-	echo -e "\n${turquoise}█ ${gray}POLYBAR AÑADIDA Y CONFIGURADA CORRECTAMENTE ${turquoise}█${end}"
-        sleep 1
+	echo -e "\n${turquoise}█ ${gray}POLYBAR AÑADIDA Y CONFIGURADA CORRECTAMENTE ${turquoise}█${end}"; sleep 1
         echo -e "\n${yellow}[*] CONFIGURANDO PICOM"; sleep 1
 	mkdir ~/.config/picom
 	cp picom.conf ~/.config/picom/.
 	status_code
-	echo -e "\n${turquoise}█ ${gray}PICOM CONFIGURADO CORRECTAMENTE ${turquoise}█${end}"
-	sleep 1
+	echo -e "\n${turquoise}█ ${gray}PICOM CONFIGURADO CORRECTAMENTE ${turquoise}█${end}"; sleep 1
 	echo -e "\n${yellow}[*] ACTUALIZANDO EL SISTEMA${end}"; sleep 1
         xterm -T "UPDATING SYSTEM" -geometry 100x30 -e "sudo apt update"
         status_code
-        echo -e "\n${turquoise}█ ${gray}SISTEMA ACTUALIZADO CORRECTAMENTE ${turquoise}█${end}"
-        sleep 1
+        echo -e "\n${turquoise}█ ${gray}SISTEMA ACTUALIZADO CORRECTAMENTE ${turquoise}█${end}"; sleep 1
         echo -e "\n${yellow}[*] INSTALANDO MÁS PAQUETES NECESARIOS"; sleep 1
         xterm -T "INSTALLING NECESARY POLYBAR PACKAGES" -geometry 100x30 -e "sudo apt install libpam0g-dev libxrandr-dev libfreetype6-dev libimlib2-dev libxft-dev -y"
 	status_code
