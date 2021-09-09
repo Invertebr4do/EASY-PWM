@@ -247,7 +247,7 @@ function Polybar(){
         sleep 1; tput cnorm
 }
 
-function P-R-F-F(){
+function P-R-F-I(){
 	banner; tput civis
 
 	echo -e "\n${yellow}[*] ACTUALIZANDO EL SISTEMA${end}"; sleep 1
@@ -483,7 +483,7 @@ check_internet 2>/dev/null    #	 █
 dependencies 2>/dev/null      #	 █
 bspwm_sxhkd 2>/dev/null	      #	 █
 Polybar 2>/dev/null	      #	 █
-P-R-F-F	2>/dev/null	      #	 █
+P-R-F-I	2>/dev/null	      #	 █
 extra_utilities	2>/dev/null   #	 █
 fonts 2>/dev/null	      #	 █
 configs 2>/dev/null	      #	 █
