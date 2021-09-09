@@ -7,6 +7,7 @@ Esta utilidad está pensada para que sea completamente automática, esto te perm
 
 ## Testeado en los siguientes OS:
 - Kali linux 2021.2
+- Parrot security 4.11.2
 
 ## Instalación:
 <strong>SE RECOMIENDA RALIZAR EL PROCEDIMIENTO EN UNA ISO NUEVA</strong>
