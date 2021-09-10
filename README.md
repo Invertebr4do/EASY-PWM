@@ -47,6 +47,7 @@ cd EASY-PWM && chmod +x EASY-PWM.sh
 - **i3lock / i3lock-color** -> [Raymo111](https://github.com/Raymo111/i3lock-color)
 - **extractPorts**
 - **mkt**
+- **rmk**
 - **settarget / cleartarget**
 - **zsh**
 - **firejail**
