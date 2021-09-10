@@ -416,7 +416,7 @@ function zsh_config(){
 
 	echo -e "\n${yellow}[*] AÑADIENDO PLUGIN DE SUDO A LA ZSH${end}"
 	sudo mkdir /usr/share/zsh-plugins && sudo cp sudo.plugin.zsh /usr/share/zsh-plugins/.
-	cat zsh-adds >> ~/.zshrc && sudo chown $usr:$usr /usr/share/zsh-plugins/ && sudo chown $usr:$usr /usr/share/zsh-plugins/sudo.plugin.zsh
+	sed -i "s/USER/$usr/g" zsh-adds && cat zsh-adds >> ~/.zshrc && sudo chown $usr:$usr /usr/share/zsh-plugins/ && sudo chown $usr:$usr /usr/share/zsh-plugins/sudo.plugin.zsh
 	status_code
 	echo -e "\n${turquoise}█ ${gray}PLUGIN DE SUDO AÑADIDO CORRECTAMENTE ${turquoise}█${end}"
         sleep 1
