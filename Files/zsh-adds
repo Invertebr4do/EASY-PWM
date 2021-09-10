@@ -9,11 +9,11 @@ turquoiseColor="\e[0;36m\033[1m"
 grayColor="\e[0;37m\033[1m"
 
 function cleartarget(){
-        echo "" > /home/invertebrado/.config/bin/target
+        echo "" > /home/USER/.config/bin/target
 }
 
 function settarget(){
-        echo $1 > /home/invertebrado/.config/bin/target      
+        echo $1 > /home/USER/.config/bin/target      
 }
 
 function mkt(){
