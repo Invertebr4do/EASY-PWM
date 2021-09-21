@@ -56,7 +56,7 @@ cd EASY-PWM && chmod +x EASY-PWM.sh
 - **firejail**
 - **flameshot**
 
-## Tutorial para la onfiguración manual:
+## Tutorial para la configuración manual:
 - s4vitar: https://www.youtube.com/watch?v=mHLwfI1nHHY&t=3013s
 
 ## Disfruta :)
