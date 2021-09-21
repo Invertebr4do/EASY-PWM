@@ -94,7 +94,9 @@ function dependencies(){
 	
 	echo -e "\n${yellow}[*] BUSCANDO ACTUALIZACIONES${end}"; sleep 1
 	update=$(sudo apt update | tail -n 1 | grep -oP "\d{1,5000}" | tr -d '\n')
-	echo -e "\n${purple}█ ${gray}HAY ${purple}$update${gray} PAQUETES POR ACTUALIZAR ${purple}█${end}"
+	if [ "$update" > "0" ]; then
+		echo -e "\n${purple}█ ${gray}HAY ${purple}$update${gray} PAQUETES POR ACTUALIZAR ${purple}█${end}"
+        fi
 	which xterm > /dev/null 2>&1
 	if [ "$(echo $?)" != "0" ]; then
 		echo -e "\n${yellow}[*] INSTALANDO XTERM ${end}"; sleep 1
