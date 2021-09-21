@@ -1,4 +1,7 @@
 <h1>EASY-PWM</h1>
+
+[![Logo](https://github.com/Invertebr4do/EASY-PWM/blob/main/img_header.png?raw=true "Logo")](https://github.com/Invertebr4do/EASY-PWM/blob/main/img_header.png?raw=true "Logo")
+
 Este script hecho en bash está creado para la automatización de mi configuración de bspwm, es casi la misma de
 
 [s4vitar](https://github.com/s4vitar), pero con algunos cambios
