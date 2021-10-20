@@ -10,6 +10,8 @@ purple="\e[0;35m\033[1m"
 turquoise="\e[0;36m\033[1m"
 gray="\e[0;37m\033[1m"
 
+export DEBIAN_FRONTEND=noninteractive
+
 function banner(){
 	tuput civis; clear
 	echo -e "\n${green}███████${turquoise}╗${gray}░${green}█████${turquoise}${turquoise}╗${gray}░░${green}██████${turquoise}${turquoise}╗${green}██${turquoise}╗${gray}░░░${green}██${turquoise}╗${gray}░░░░░░${green}██████${turquoise}╗${gray}░░${green}██${turquoise}╗${gray}░░░░░░░${green}██${turquoise}╗${green}███${turquoise}╗${gray}░░░${green}███${turquoise}╗"
