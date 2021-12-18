@@ -193,7 +193,7 @@ function bspwm_sxhkd(){
 	sleep 1
 	xterm -T "INSTALLING BSPWM" -geometry 100x30 -e "sudo apt install bspwm -y"
 	status_code
-        echo -e "\n${turquoise}█ ${gray}BSPWM INSTALADO CORRECTAMENTE ${turquoise}█${end}; sleep 1
+        echo -e "\n${turquoise}█ ${gray}BSPWM INSTALADO CORRECTAMENTE ${turquoise}█${end}"; sleep 1
 
 	echo -e "\n${yellow}[*] CARGANDO ALGUNOS FICHEROS DE BSPWM Y SXHKD${end}"; sleep 1
 	mkdir ~/.config/bspwm
