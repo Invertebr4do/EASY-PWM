@@ -10,9 +10,9 @@ Esta utilidad está pensada para que sea completamente automática, esto te perm
 - Parrot security 5.1 Electro Ara.
 - Ubuntu 22.04.1 LTS.
 
-> NOTA PARA USUARIOS DE PARROT
+> **NOTA PARA USUARIOS DE PARROT**
 >
-> En Parrot no funciona la configuración de *rofi* que se muestra aquí, por lo que quedará con la configuración default.
+> En Parrot *no* funciona la configuración de *rofi* que se muestra aquí, por lo que quedará con la configuración default.
 
 ## Instalación:
 <strong>SE RECOMIENDA RALIZAR EL PROCEDIMIENTO EN UNA ISO NUEVA</strong>
