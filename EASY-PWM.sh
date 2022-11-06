@@ -724,7 +724,8 @@ else
     fonts
     configs
     zsh_config
-    bann
+    banner2
+    change_session
     tput cnorm
 
   else
