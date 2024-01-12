@@ -6,13 +6,7 @@ Este script hecho en bash está creado para la automatización de mi configuraci
 Esta utilidad está pensada para que sea completamente automática, esto te permitirá salir a tomarte un café mientras se configura tu entorno bspwm.
 
 ## Testeado en los siguientes OS:
-- Kali linux 2022.3 Changelog.
-- Parrot security 5.1 Electro Ara.
-- Ubuntu 22.04.1 LTS.
-
-> **NOTA PARA USUARIOS DE PARROT**
->
-> En Parrot *no* funciona la configuración de *rofi* que se muestra aquí, por lo que quedará con la configuración default.
+- Kali Linux 2023.4.
 
 ## Instalación:
 <strong>SE RECOMIENDA RALIZAR EL PROCEDIMIENTO EN UNA ISO NUEVA</strong>
