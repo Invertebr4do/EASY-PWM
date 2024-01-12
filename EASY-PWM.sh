@@ -110,12 +110,10 @@ function iface(){
   sed -i "s/eth0/$ni/" Files/bin/ethernet_status.sh
 }
 
-os=$(lsb_release -a 2>/dev/null | grep "ID:" | awk '{print $2}' FS=":" | sed 's/\t//g')
-
 function package_installer(){
   if [ $(echo $verbose) == "1" ]; then
     for package in ${required_packages[@]}; do
-      echo -ne "\t${yellow}[${blue}*${yellow}] INSTALANDO ${turquoise}$package${end}"
+      echo -ne "\t${yellow}[${blue}*${yellow}] INSTALANDO ${turquoise}$package${end}\n\n"
       sudo apt install $package -y
       status_code
       for i in $(seq 1 7); do echo -ne "${yellow}.${end}"; sleep 0.1; done
@@ -146,45 +144,28 @@ function dependencies(){
   if [ "$(echo $?)" -eq 0 ]; then
     if [ "$update" > "0" ]; then
       echo -e "\n${yellow}[*] ACTUALIZANDO PAQUETES DEL SISTEMA${end}"; sleep 1
-      if [ "$os" == "Parrot" ]; then
-        if [ $(echo $verbose) == "1" ]; then
-          sudo apt purge realtek-rtl8188eus-dkms -y
-          sudo parrot-upgrade -y
-        elif [ $(echo $verbose) == "0" ]; then
-          sudo apt purge realtek-rtl8188eus-dkms -y &>/dev/null
-          sudo parrot-upgrade -y &>/dev/null
-        fi
-        if [ "$(echo $?)" != "0" ]; then
-          echo -e "\n${red}[X] OCURRIÓ UN PROBLEMA${end}\n"
-          tput cnorm; exit 1
-        else
-          echo -e "\n${turquoise}█ ${gray}SISTEMA ACTUALIZADO CORRECTAMENTE ${turquoise}█${end}"
-          sleep 1
-        fi
+      if [ $(echo $verbose) == "1" ]; then
+        sudo apt upgrade -y
+      elif [ $(echo $verbose) == "0" ]; then
+        sudo apt upgrade -y &>/dev/null
+      fi
+      if [ "$(echo $?)" != "0" ]; then
+        echo -e "\n${red}[X] OCURRIÓ UN PROBLEMA${end}\n"
+        exit 1
       else
-        if [ $(echo $verbose) == "1" ]; then
-          sudo apt upgrade -y
-        elif [ $(echo $verbose) == "0" ]; then
-          sudo apt upgrade -y &>/dev/null
-        fi
-        if [ "$(echo $?)" != "0" ]; then
-          echo -e "\n${red}[X] OCURRIÓ UN PROBLEMA${end}\n"
-          exit 1
-        else
-          echo -e "\n${turquoise}█ ${gray}SISTEMA ACTUALIZADO CORRECTAMENTE ${turquoise}█${end}"
-          sleep 1
-        fi
+        echo -e "\n${turquoise}█ ${gray}SISTEMA ACTUALIZADO CORRECTAMENTE ${turquoise}█${end}"
+        sleep 1
       fi
 		
     else
 			echo -e "\n${turquoise}█ ${gray}NO SE ENCONTRARON PAQUETES POR ACTUALIZAR ${turquoise}█${end}"
 		fi
 		
-    echo -ne \\n${yellow}[*] INSTALANDO PAQUETES NECESARIOS = ;
+    echo -ne \\n${yellow}[*] INSTALANDO ALGUNOS PAQUETES NECESARIOS = ;
     sleep 2 & while [ "$(ps a | awk '{print $1}' | grep $!)" ] ; do for X in '-' '\' '|' '/'; do echo -en "\b$X"; sleep 0.1; done; done
     echo -e "${end}\n"
 
-    declare -a required_packages=(build-essential net-tools git neovim xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev curl)
+    declare -a required_packages=(build-essential libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev libxinerama1 libxinerama-dev kitty flameshot brightnessctl pamixer moreutils)
 
     package_installer
 
@@ -195,19 +176,7 @@ function dependencies(){
     tput cnorm; exit 1
   fi
 
-  echo -e "\n${yellow}[*] INSTALANDO TERMINAL KITTY${end}"; sleep 1
-  if [ $(echo $verbose) == "1" ]; then
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-  elif [ $(echo $verbose) == "0" ]; then
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin &>/dev/null
-  fi
-  pkill kitty &>/dev/null
-  status_code
-  sudo ln -s -f /home/$USER/.local/kitty.app/bin/kitty /usr/bin/kitty
-  echo -e "\n${turquoise}█ ${gray}TERMINAL KITTY INSTALADA CORRECTAMENTE ${turquoise}█${end}"
-  sleep 1
-
-  echo -e "\n${yellow}[*] CONFIGURANDO KITTY${end}"; sleep 1
+  echo -e "\n${yellow}[*] CONFIGURANDO TERMINAL KITTY${end}"; sleep 1
   mkdir ~/.config/kitty 2>/dev/null
   cp {Files/kitty/kitty.conf,Files/kitty/color.ini} ~/.config/kitty/.
 }
@@ -241,6 +210,7 @@ function bspwm_sxhkd(){
 	  status_code
 	  sudo make install
 	  status_code
+    cd ..
   }
 
   echo -e "\n${yellow}[*] INSTALANDO BSPWM (make)"; sleep 1
@@ -258,7 +228,7 @@ function bspwm_sxhkd(){
 	echo -e "\n${yellow}[*] INSTALANDO SXHKD${end}"; sleep 1
 
   function install_sxhkd(){
-    cd ../sxhkd/
+    cd sxhkd/
 	  make
 	  status_code
     sudo make install
@@ -287,8 +257,7 @@ function bspwm_sxhkd(){
   echo -e "\n${turquoise}█ ${gray}BSPWM INSTALADO CORRECTAMENTE ${turquoise}█${end}"; sleep 1
 
 	echo -e "\n${yellow}[*] CARGANDO ALGUNOS FICHEROS DE BSPWM Y SXHKD${end}"; sleep 1
-	mkdir ~/.config/bspwm
-	mkdir ~/.config/sxhkd
+	mkdir ~/.config/{bspwm,sxhkd}
 	cp Files/bspwmrc ~/.config/bspwm/
 	status_code
   echo -e "\n${turquoise}█ ${gray}FICHEROS CARGADOS CORRECTAMENTE ${turquoise}█${end}"
@@ -301,11 +270,7 @@ function bspwm_sxhkd(){
 	sleep 1
 
 	echo -e "\n${yellow}[*] CONFIGURANDO SXHKDRC${end}"; sleep 1
-  if [ $os == "Parrot" ]; then
-    cat Files/sxhkdrc | sed 's/\/home\/USER\/\.config\/rofi\/launchers\/type-3\/launcher.sh/rofi -show run/' > ~/.config/sxhkd/sxhkdrc
-  else
-	  cat Files/sxhkdrc | sed 's/USER/'$USER'/g' > ~/.config/sxhkd/sxhkdrc
-  fi
+	cat Files/sxhkdrc | sed 's/USER/'$USER'/g' > ~/.config/sxhkd/sxhkdrc
   status_code
   echo -e "\n${turquoise}█ ${gray}SXHKDRC CONFIGURADO CORRECTAMENTE ${turquoise}█${end}"
   sleep 1
@@ -325,23 +290,9 @@ function Polybar(){
   sleep 2 & while [ "$(ps a | awk '{print $1}' | grep $!)" ] ; do for X in '-' '\' '|' '/'; do echo -en "\b$X"; sleep 0.1; done; done
   echo -e "${end}\n"
 
-  declare -a required_packages=(cmake cmake-data pkg-config python3-sphinx libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev libjsoncpp-dev libmpdclient-dev libnl-genl-3-dev polybar)
+  declare -a required_packages=(cmake cmake-data pkg-config python3-sphinx libcairo2-dev libxcb1-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev libjsoncpp-dev libmpdclient-dev libuv1-dev libnl-genl-3-dev)
   
-  if [ $os == "Kali" ]; then
-    package_installer 
-    if [ $(echo $verbose) == "1" ]; then
-      sudo apt install libcurl4-openssl-dev -y
-    elif [ $(echo $verbose) == "0" ]; then
-      sudo apt install libcurl4-openssl-dev -y &>/dev/null
-    fi
-  else
-    package_installer
-    if [ $(echo $verbose) == "1" ]; then
-      sudo apt-get install libuv1.dev -y
-    elif [ $(echo $verbose) == "0" ]; then
-      sudo apt-get install libuv1.dev -y &>/dev/null
-    fi
-  fi
+  package_installer 
 
   echo -e "\n${turquoise}█ ${gray}PAQUETES INSTALADOS CORRECTAMENTE ${turquoise}█${end}"
 
@@ -390,7 +341,7 @@ function picom_rofi(){
   sleep 2 & while [ "$(ps a | awk '{print $1}' | grep $!)" ] ; do for X in '-' '\' '|' '/'; do echo -en "\b$X"; sleep 0.1; done; done
   echo -e "${end}\n"
 
-  declare -a required_packages=(meson libpcre3-dev libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev)
+  declare -a required_packages=(meson libxext-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-present-dev libpixman-1-dev libconfig-dev libgl1-mesa-dev libpcre3 libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev libdbus-1-dev)
   
   package_installer 
 
@@ -468,7 +419,7 @@ function feh_ilock(){
   sleep 2 & while [ "$(ps a | awk '{print $1}' | grep $!)" ] ; do for X in '-' '\' '|' '/'; do echo -en "\b$X"; sleep 0.1; done; done
   echo -e "${end}\n"
 
-  declare -a required_packages=(autoconf gcc make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxcb-xtest0-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev imagemagick x11-utils)
+  declare -a required_packages=(autoconf gcc make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev)
   
   package_installer 
 
@@ -497,9 +448,9 @@ function fonts(){
 	echo -e "\n${yellow}[*] INSTALANDO HACK NERD FONTS"; sleep 1
 	cd Files
   if [ $(echo $verbose) == "1" ]; then
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.2/Hack.zip
   elif [ $(echo $verbose) == "0" ]; then
-    wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Hack.zip
+    wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.2/Hack.zip
   fi
   unzip Hack.zip > /dev/null 2>&1 && sudo mv *.ttf /usr/local/share/fonts/.
   rm Hack.zip LICENSE.md readme.md
@@ -542,18 +493,7 @@ function configs(){
  
   package_installer
 
-  if [ $os == "Kali" ]; then
-    echo -ne "\t${yellow}[${blue}*${yellow}] INSTALANDO ${turquoise}libimlib2-dev${end}"
-    if [ $(echo $verbose) == "1" ]; then
-      sudo apt install libimlib2-dev -y
-    elif [ $(echo $verbose) == "0" ]; then
-      sudo apt install libimlib2-dev -y &>/dev/null
-    fi
-    for i in $(seq 1 7); do echo -ne "${yellow}.${end}"; sleep 0.1; done
-    echo -e " ${yellow}[${green}\u2713${yellow}]${end}"
-  fi
-
-	echo -e "\n${turquoise}█ ${gray}I3LOCK Y DEPENDENCIAS INSTALADASCORRECTAMENTE ${turquoise}█${end}"
+	echo -e "\n${turquoise}█ ${gray}I3LOCK Y DEPENDENCIAS INSTALADAS CORRECTAMENTE ${turquoise}█${end}"
   sleep 1
 	
   function install_ilock-col(){
@@ -583,42 +523,25 @@ function configs(){
 
 function zsh_config(){
   banner; tput civis
-
-  which zsh &>/dev/null
-
-  if [ $(echo $?) != "0" ]; then
-    echo -e "\n${yellow}[*] INSTALANDO ZSH${end}"; sleep 1
-    if [ $(echo $verbose) == "1" ]; then
-      sudo apt install zsh -y
-    elif [ $(echo $verbose) == "0" ]; then
-      sudo apt install zsh -y &>/dev/null
-    fi
-    status_code
-  fi
-
+  sudo ln -s -f /home/$USER/.zshrc /root/.zshrc
   echo -e "\n${yellow}[*] CLONANDO Y AÑADIENDO POWELEVEL10K PARA EL USUARIO ${gray}$USER${end}"; sleep 1
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k > /dev/null 2>&1
 	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 	echo -e "\n${yellow}[*] CLONANDO Y AÑADIENDO POWELEVEL10K PARA EL USUARIO ${gray}root${end}"; sleep 1
 	sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /root/powerlevel10k > /dev/null 2>&1
-	sudo echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>/root/.zshrc
-	if [ "$os" != "Kali" ]; then
-		usermod --shell /usr/bin/zsh $USER &>/dev/null
-		sudo usermod --shell /usr/bin/zsh root &>/dev/null
-	fi
 	status_code
+  cd Files
 	echo -e "\n${turquoise}█ ${gray}POWELEVEL10K INSTALADO Y AÑADIDO CORRECTAMENTE PARA LOS DOS USUARIOS ${turquoise}█${end}"
   sleep 1
 
-	cd Files
 	echo -e "\n${yellow}[*] AÑADIENDO BAT Y LSD A LA ZSH${end}"
-	sudo ln -s -f /home/$USER/.zshrc /root/.zshrc
+	
   if [ $(echo $verbose) == "1" ]; then
 	  sudo apt install bat -y
-	  wget https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb && sudo dpkg -i lsd_0.23.1_amd64.deb
+	  sudo apt install lsd -y
 	elif [ $(echo $verbose) == "0" ]; then
     sudo apt install bat -y &>/dev/null
-    wget https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb &>/dev/null && sudo dpkg -i lsd_0.23.1_amd64.deb &>/dev/null
+    sudo apt install lsd -y &>/dev/null
   fi
   status_code
 	echo -e "\n${turquoise}█ ${gray}BAT Y LSD INSTALADO Y AÑADIDO CORRECTAMENTE ${turquoise}█${end}"
@@ -658,6 +581,7 @@ function zsh_config(){
     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 &>/dev/null
   fi
   status_code
+  pushd /opt && sudo wget -q https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz && sudo tar -xf nvim-linux64.tar.gz; popd
   echo -e "\n${yellow}[*] CLONANDO E INSTALANDO NVCHAD PARA EL USUARIO ${gray}root${end}"
   sudo rm -rf /root/.config/nvim
   if [ $(echo $verbose) == "1" ]; then
