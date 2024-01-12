@@ -581,7 +581,7 @@ function zsh_config(){
     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 &>/dev/null
   fi
   status_code
-  pushd /opt && sudo wget -q https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz && sudo tar -xf nvim-linux64.tar.gz; popd
+  pushd /opt &>/dev/null && sudo wget -q https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz && sudo tar -xf nvim-linux64.tar.gz; popd &>/dev/null
   echo -e "\n${yellow}[*] CLONANDO E INSTALANDO NVCHAD PARA EL USUARIO ${gray}root${end}"
   sudo rm -rf /root/.config/nvim
   if [ $(echo $verbose) == "1" ]; then
