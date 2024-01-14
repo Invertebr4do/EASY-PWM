@@ -13,7 +13,7 @@ gray="\e[0;37m\033[1m"
 export DEBIAN_FRONTEND=noninteractive
 
 function helpPanel(){
-  echo -e "\n${red}[!] Uso: $0"
+  echo -e "\n${red}[!] Uso: $0 -v [1/0]"
   for i in $(seq 1 80); do echo -ne ${red}═${end}; done
   echo -e "\n\n\t${blue}\u2503${end}  ${purple}[-v]${end} ${yellow}Agregar verbose${end}"
   echo -e "\n\t\t${purple}(${end}${green}1${end}${purple})${end} ${turquoise}si${end} ${blue}[${yellow}Util para ver lo que está pasando${blue}]${end}"
