@@ -483,7 +483,7 @@ function extra_utilities(){
   sleep 2 & while [ "$(ps a | awk '{print $1}' | grep $!)" ] ; do for X in '-' '\' '|' '/'; do echo -en "\b$X"; sleep 0.1; done; done
   echo -e "${end}\n"
 
-  declare -a required_packages=(xclip firejail caja flameshot scrub brightnessctl)
+  declare -a required_packages=(xclip caja flameshot scrub brightnessctl)
  
   package_installer
 
