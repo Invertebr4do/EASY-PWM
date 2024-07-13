@@ -52,7 +52,6 @@ cd EASY-PWM && chmod +x EASY-PWM.sh
 - **mkt** *~»* [s4vitar](https://www.youtube.com/s4vitar)
 - **rmk** *~»* [s4vitar](https://www.youtube.com/s4vitar)
 - **settarget / cleartarget** *~»* [s4vitar](https://www.youtube.com/s4vitar)
-- **firejail** *~»* [netblue30](https://github.com/netblue30/firejail)
 - **flameshot** *~»* [flameshot](https://github.com/flameshot-org/flameshot)
 - **zsh**
 
