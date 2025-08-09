@@ -448,9 +448,9 @@ function fonts(){
 	echo -e "\n${yellow}[*] INSTALANDO HACK NERD FONTS"; sleep 1
 	cd Files
   if [ $(echo $verbose) == "1" ]; then
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.2/Hack.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
   elif [ $(echo $verbose) == "0" ]; then
-    wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.2/Hack.zip
+    wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
   fi
   unzip Hack.zip > /dev/null 2>&1 && sudo mv *.ttf /usr/local/share/fonts/.
   rm Hack.zip LICENSE.md readme.md
@@ -576,18 +576,18 @@ function zsh_config(){
   echo -e "\n${yellow}[*] CLONANDO E INSTALANDO NVCHAD PARA EL USUARIO ${gray}$USER${end}"
   rm -rf ~/.config/nvim
   if [ $(echo $verbose) == "1" ]; then
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+  	git clone https://github.com/NvChad/starter ~/.config/nvim
   elif [ $(echo $verbose) == "0" ]; then
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 &>/dev/null
+  	git clone https://github.com/NvChad/starter ~/.config/nvim &>/dev/null
   fi
   status_code
-  pushd /opt &>/dev/null && sudo wget -q https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz && sudo tar -xf nvim-linux64.tar.gz; popd &>/dev/null
+  pushd /opt &>/dev/null && sudo wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz && sudo tar -xf nvim-linux-x86_64.tar.gz; popd &>/dev/null
   echo -e "\n${yellow}[*] CLONANDO E INSTALANDO NVCHAD PARA EL USUARIO ${gray}root${end}"
   sudo rm -rf /root/.config/nvim
   if [ $(echo $verbose) == "1" ]; then
-    sudo git clone https://github.com/NvChad/NvChad /root/.config/nvim --depth 1
+    sudo git clone https://github.com/NvChad/starter /root/.config/nvim
   elif [ $(echo $verbose) == "0" ]; then
-    sudo git clone https://github.com/NvChad/NvChad /root/.config/nvim --depth 1 &>/dev/null
+    sudo git clone https://github.com/NvChad/starter /root/.config/nvim &>/dev/null
   fi
   status_code
   echo -e "\n${turquoise}█ ${gray}NVCHAD CLONADO E INSTALADO CORRECTAMENTE ${turquoise}█${end}"
